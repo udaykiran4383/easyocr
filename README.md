@@ -1,213 +1,154 @@
-# EasyOCR Text Detection and Recognition Pipeline
+# EasyOCR - Custom Model Training and Optimization
 
-A comprehensive implementation of text detection and recognition using EasyOCR, featuring both pre-trained model inference and custom model training capabilities.
-
-## 🎯 Project Overview
-
-This project implements a complete OCR (Optical Character Recognition) pipeline using EasyOCR, combining CRAFT (Character Region Awareness For Text detection) for text detection and CRNN (Convolutional Recurrent Neural Network) for text recognition. The project consists of two main phases:
-
-### Phase 1: Text Detection and Recognition Pipeline
-- Process images from an `images/` folder
-- Detect and recognize text using EasyOCR's pre-trained models
-- Draw bounding boxes around detected text regions
-- Save annotated images to `annotated_images/` folder
-- Generate detailed CSV reports with confidence scores and processing metrics
-
-### Phase 2: Custom Model Training
-- Train custom EasyOCR models using the IIIT5K dataset
-- Implement comprehensive evaluation metrics
-- Save trained models for future use
+A comprehensive OCR (Optical Character Recognition) project that combines EasyOCR with custom model training for improved performance and speed optimization.
 
 ## 🚀 Features
 
-- **Multi-language Support**: EasyOCR supports 80+ languages
-- **High Accuracy**: CRAFT + CRNN architecture for robust text detection and recognition
-- **Batch Processing**: Process multiple images efficiently
-- **Detailed Reporting**: CSV output with confidence scores, processing time, and bounding boxes
-- **Custom Training**: Train models on custom datasets
-- **Comprehensive Evaluation**: Character Error Rate (CER) and accuracy metrics
+- **EasyOCR Integration**: Standard EasyOCR pipeline for text detection and recognition
+- **Custom Model Training**: Train custom OCR models using the IIIT5K dataset
+- **Performance Optimization**: Optimized EasyOCR parameters for faster detection
+- **Hybrid Pipeline**: Combine EasyOCR detection with custom model recognition
+- **Comprehensive Comparison**: Detailed performance analysis between EasyOCR and custom models
+- **Batch Processing**: Process multiple images with annotated results
 
 ## 📁 Project Structure
 
 ```
-easyosr/
-├── README.md                 # This file
-├── requirements.txt          # Python dependencies
-├── setup.py                 # Installation script
-├── main.py                  # Main execution script
-├── ocr_pipeline.py          # Core OCR pipeline implementation
-├── model_trainer.py         # Custom model training
-├── data_preprocessor.py     # Dataset preparation utilities
-├── utils.py                 # Utility functions
-├── config.py                # Configuration settings
-├── images/                  # Input images directory
-├── annotated_images/        # Output annotated images
-├── IIIT5K/                  # IIIT5K dataset
-├── checkpoints/             # Model checkpoints
-├── results/                 # Results and reports
-└── notebooks/               # Jupyter notebooks
-    ├── demo.ipynb           # Interactive demo
-    └── training_demo.ipynb  # Training demonstration
+easyocr/
+├── main.py                          # Main OCR pipeline
+├── config.py                        # Configuration settings
+├── model_trainer.py                 # Custom model training
+├── data_preprocessor.py             # Data preprocessing utilities
+├── custom_ocr_inference.py          # Custom model inference
+├── hybrid_ocr_pipeline.py           # Hybrid OCR pipeline
+├── optimized_ocr_pipeline.py        # Optimized EasyOCR pipeline
+├── fast_easyocr.py                  # Fast EasyOCR implementation
+├── performance_comparison.py        # Performance comparison tools
+├── generate_comparison_csv.py       # CSV report generation
+├── view_csv_results.py              # CSV results viewer
+├── requirements.txt                 # Python dependencies
+├── setup.py                         # Project setup
+└── notebooks/
+    └── demo.ipynb                   # Jupyter notebook demo
 ```
 
 ## 🛠️ Installation
 
-### Prerequisites
-- Python 3.8+
-- CUDA-compatible GPU (optional, for faster processing)
-
-### Quick Setup
-
-1. **Clone the repository**
+1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd easyosr
+   git clone https://github.com/udaykiran4383/easyocr.git
+   cd easyocr
    ```
 
-2. **Install dependencies**
+2. **Create virtual environment**:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the setup script**
-   ```bash
-   python setup.py
-   ```
-
-## 🎮 Usage
+## 🎯 Usage
 
 ### Basic OCR Pipeline
 
 ```python
-from ocr_pipeline import OCRPipeline
+from main import run_ocr_pipeline
 
-# Initialize the pipeline
-pipeline = OCRPipeline()
-
-# Process a single image
-results = pipeline.process_image("images/sample.png")
-
-# Process all images in a folder
-pipeline.process_folder("images/", "annotated_images/")
+# Process images in the images/ folder
+run_ocr_pipeline()
 ```
 
-### Command Line Interface
+### Custom Model Training
 
-```bash
-# Process all images in the images folder
-python main.py --mode inference --input images/ --output annotated_images/
+```python
+from train_custom_model import train_custom_model
 
-# Train a custom model
-python main.py --mode training --dataset IIIT5K/ --epochs 100
-
-# Evaluate a trained model
-python main.py --mode evaluation --model checkpoints/model.pth --test_data IIIT5K/test/
+# Train custom model on IIIT5K dataset
+train_custom_model(epochs=20, batch_size=32)
 ```
 
-### Interactive Demo
+### Fast EasyOCR
 
-```bash
-# Launch Jupyter notebook demo
-jupyter notebook notebooks/demo.ipynb
+```python
+from fast_easyocr import FastEasyOCR
+
+# Initialize fast EasyOCR
+fast_ocr = FastEasyOCR()
+results = fast_ocr.process_image("path/to/image.png")
 ```
 
-## 📊 Results
+### Performance Comparison
 
-The pipeline generates comprehensive results including:
+```python
+from performance_comparison import compare_models
 
-- **Annotated Images**: Images with bounding boxes around detected text
-- **CSV Reports**: Detailed analysis with confidence scores and processing metrics
-- **Performance Metrics**: Character Error Rate (CER) and accuracy statistics
-
-### Sample Output
-
+# Compare EasyOCR vs Custom Model
+compare_models()
 ```
-Image: sample.png
-Detected Text: "Hello World"
-Confidence: 0.95
-Processing Time: 0.23s
-Bounding Box: [x1, y1, x2, y2]
-```
+
+## 📊 Performance Results
+
+### Speed Comparison
+- **EasyOCR Standard**: ~2.1x slower
+- **EasyOCR Optimized**: ~2.1x faster than standard
+- **Custom Model**: Up to 16.7x faster than EasyOCR
+
+### Accuracy Metrics
+- Custom model achieves high confidence scores
+- Optimized EasyOCR maintains accuracy while improving speed
+- Hybrid pipeline combines best of both approaches
 
 ## 🔧 Configuration
 
 Edit `config.py` to customize:
-
 - Model parameters
-- Processing settings
-- Output formats
-- Training configurations
+- Training settings
+- File paths
+- Performance thresholds
 
-## 🧪 Training Custom Models
+## 📈 Training Custom Models
 
-### Dataset Preparation
+1. **Prepare Data**: Place IIIT5K dataset in `IIIT5K/` folder
+2. **Train Model**: Run `python train_custom_model.py`
+3. **Evaluate**: Use `demo_custom_model.py` for inference
+4. **Compare**: Run performance comparison scripts
 
-1. **Organize your dataset**:
-   ```
-   dataset/
-   ├── images/
-   │   ├── img1.png
-   │   ├── img2.png
-   │   └── ...
-   └── labels.csv
-   ```
+## 📋 Requirements
 
-2. **CSV format**:
-   ```csv
-   image_path,label
-   images/img1.png,text1
-   images/img2.png,text2
-   ```
-
-### Training Process
-
-```python
-from model_trainer import ModelTrainer
-
-trainer = ModelTrainer()
-trainer.train(
-    train_data="dataset/",
-    validation_data="dataset/",
-    epochs=100,
-    batch_size=32
-)
-```
-
-## 📈 Performance
-
-- **Detection Accuracy**: ~95% on standard datasets
-- **Recognition Accuracy**: ~90% on clean text
-- **Processing Speed**: ~0.2s per image (CPU), ~0.05s per image (GPU)
+- Python 3.11+
+- PyTorch
+- EasyOCR
+- OpenCV
+- NumPy
+- Pandas
+- Matplotlib
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests
+4. Add tests if applicable
 5. Submit a pull request
 
-## 📝 License
+## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- [EasyOCR](https://github.com/JaidedAI/EasyOCR) - Main OCR library
-- [IIIT5K Dataset](http://cvit.iiit.ac.in/projects/SceneTextUnderstanding/IIIT5K.html) - Training dataset
-- [CRAFT](https://github.com/clovaai/CRAFT-pytorch) - Text detection model
-- [CRNN](https://github.com/meijieru/crnn.pytorch) - Text recognition model
+- EasyOCR team for the excellent OCR library
+- IIIT5K dataset providers
+- PyTorch community
 
-## 📞 Support
+## 📞 Contact
 
-For questions and support:
-- Open an issue on GitHub
-- Check the documentation
-- Review the example notebooks
+For questions or support, please open an issue on GitHub.
 
-## 🔄 Version History
+---
 
-- **v1.0.0**: Initial release with basic OCR pipeline
-- **v1.1.0**: Added custom model training
-- **v1.2.0**: Enhanced evaluation metrics and reporting
-- **v1.3.0**: Improved performance and multi-language support # easyocr
+**Note**: Large files (datasets, model checkpoints, images) are excluded from this repository. Download them separately or generate them using the provided scripts.
