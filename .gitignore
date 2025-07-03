@@ -76,4 +76,4 @@ ocr_comparison_*.csv
 ocr_performance_*.csv
 optimized_ocr_*.csv
 optimized_ocr_*.json
-optimized_ocr_*.txt 
+optimized_ocr_*.txt easyocr_poc_package.zip
