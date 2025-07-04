@@ -48,9 +48,9 @@ Thumbs.db
 
 # Large datasets and model files
 IIIT5K/
-checkpoints/
-*.pth
-*.pt
+# checkpoints/  # Commented out to allow model files
+# *.pth  # Commented out to allow model files
+# *.pt   # Commented out to allow model files
 *.h5
 *.hdf5
 *.pkl
